@@ -10,7 +10,8 @@ void setup() {
 int[] xvals = new int[100];
 int[] yvals = new int[100];
 
-
+// This uses an unintentionally wrong version of the Marsaglia polar method
+// to transform uniform random numbers into normally distributed ones
 float[] normal() {
   float x1 = 0;
   float y1 = 0;
@@ -34,7 +35,7 @@ float[] normal() {
 
 void xes() {
   for (int i = 0; i < 100; i = i + 2) {
-    float[] x_coords = normal();  // uses  
+    float[] x_coords = normal(); 
     xvals[i] = int((x_coords[0] * 65) + 200);  // stdv and mean
     xvals[i+1] = int((x_coords[1] * 65) + 200);
     // println("Iteration: " + i + " " + xvals[i] + ", " + xvals[i+1]);
