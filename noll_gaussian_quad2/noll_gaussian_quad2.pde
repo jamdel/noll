@@ -1,7 +1,7 @@
 PGraphics pg;
 
 void setup() {
-  size(430, 680);  // weird background issue
+  size(430, 680);  // creates a 15 pixel border, solves issue with canvas being cut off
   background(100);
   pg = createGraphics(400, 650); 
   frameRate(0.25);
@@ -34,11 +34,11 @@ float[] normal() {
 
 void xes() {
   for (int i = 0; i < 100; i = i + 2) {
-    float[] x_coords = normal();   
-    xvals[i] = int((x_coords[0] * 65) + 200); // stdv and mean
+    float[] x_coords = normal();  // uses  
+    xvals[i] = int((x_coords[0] * 65) + 200);  // stdv and mean
     xvals[i+1] = int((x_coords[1] * 65) + 200);
-//    println("Iteration: " + i + " " + xvals[i] + ", " + xvals[i+1]);
-//      println("Iteration: " + i);
+    // println("Iteration: " + i + " " + xvals[i] + ", " + xvals[i+1]);
+    // println("Iteration: " + i);
   }
 }
 
@@ -49,10 +49,10 @@ void yes() {
     float c = random(-72,73);
     float y_coord = (a * pow(i, 2))  + (b * i) + c;
     y_coord = abs(y_coord);
+    
     // determines reflection
     if (y_coord > 650) {
       int leftovers = floor(y_coord/650);
-//      println(leftovers);
       if (leftovers % 2 == 1) {
         y_coord = 650 - (y_coord - (650 * leftovers));
       }
@@ -64,7 +64,6 @@ void yes() {
   }
 }
 
-
 void draw() {
   xes();
   yes();
@@ -72,12 +71,8 @@ void draw() {
   pg.background(255);
   for (int i = 1; i < 100; i++) {
     pg.line(xvals[i-1], yvals[i-1], xvals[i], yvals[i]);
-    println("Points " + i + ": (" + xvals[i-1] + ", " + yvals[i-1] + ") " + "(" + xvals[i] + ", " + yvals[i] + ")");
+    println("Points " + i + ": (" + xvals[i-1] + ", " + yvals[i-1] + ") " + "(" + xvals[i] + ", " + yvals[i] + ")");  // this shows up online
   }
   pg.endDraw();
   image(pg, 15, 15);
-}
-
-void mousePressed() {
-  draw();
 }
