@@ -1,9 +1,9 @@
 PGraphics pg;
 
 void setup() {
-  size(430, 680);  // creates a 15 pixel border, solves issue with canvas being cut off
+  size(1039, 1039);  // creates a 15 pixel border, solves issue with canvas being cut off
   background(100);
-  pg = createGraphics(400, 650); 
+  pg = createGraphics(1024, 1024); 
   frameRate(0.25);
 }
 
@@ -36,8 +36,8 @@ float[] normal() {
 void xes() {
   for (int i = 0; i < 100; i = i + 2) {
     float[] x_coords = normal(); 
-    xvals[i] = int((x_coords[0] * 65) + 200);  // stdv and mean
-    xvals[i+1] = int((x_coords[1] * 65) + 200);
+    xvals[i] = int((x_coords[0] * 150) + 512);  // stdv and mean
+    xvals[i+1] = int((x_coords[1] * 150) + 512);
     // println("Iteration: " + i + " " + xvals[i] + ", " + xvals[i+1]);
     // println("Iteration: " + i);
   }
@@ -45,20 +45,17 @@ void xes() {
 
 void yes() {
   for (int i = 0; i < 100; i++) {
-    float a = random(0, 1.000001);
-    float b = random(-10, 111);
-    float c = random(-72,73);
-    float y_coord = (a * pow(i, 2))  + (b * i) + c;
-    y_coord = abs(y_coord);
+    // formula according to website
+    float y_coord = (pow(i, 2)  + (5 * i));
     
     // determines reflection
-    if (y_coord > 650) {
-      int leftovers = floor(y_coord/650);
+    if (y_coord > 100) {
+      int leftovers = floor(y_coord/1024);
       if (leftovers % 2 == 1) {
-        y_coord = 650 - (y_coord - (650 * leftovers));
+        y_coord = 1024 - (y_coord - (1024 * leftovers));
       }
       else {
-        y_coord = y_coord - (650 * leftovers);
+        y_coord = y_coord - (1024 * leftovers);
       }
     }   
     yvals[i] = int(y_coord);
